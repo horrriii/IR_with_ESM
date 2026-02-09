@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "IR_with_ESM"
+version = "1.1.0"
+description = "A reimplementation of the Infrared module of ASE with ESM method."
+license = { text = "MIT" }
+authors = [
+    { name = "Hori Ryoya", email = "u765325j@ecs.osaka-u.ac.jp" }
+]
+dependencies = [
+    "ase>=3.22.1",
+    "imageio",
+    "tqdm",
+    "pandas",
+    "matplotlib",
+    "numpy",
+    "scipy",
+]
+
+[project.optional-dependencies]
+full = [
+    "pytest",
+    "jupyter-book",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
