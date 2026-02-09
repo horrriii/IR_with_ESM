@@ -279,28 +279,3 @@ def plane_to_indices(plane: str) -> Tuple[int, int, int, int]:
     kv = s * int(np.sum(k))  # -1 or 1
 
     return (d0, d1, d2, kv)
-
-def draw_axes(ax, view, length=2.0):
-    if view == "xy+":
-        # X axis（red）
-        ax.plot([-1, length], [-1, -1], color="r")
-        ax.text(length * 1.1, -2.0, "X", color="r")
-        # Y axis（green）
-        ax.plot([-1, -1], [-1, length], color="g")
-        ax.text(-2.0, length * 1.1, "Y", color="g")
-
-    elif view == "xz+":
-        # X axis（red）
-        ax.plot([-1, length], [-1, -1], color="r")
-        ax.text(length * 1.1, -2.0, "X", color="r")
-        # Z axis（blue）
-        ax.plot([-1, -1], [-1, length], color="b")
-        ax.text(-2.0, length * 1.1, "Z", color="b")
-
-    elif view == "yz+":
-        # Y axis（green）
-        ax.plot([-1, length], [-1, -1], color="g")
-        ax.text(length * 1.1, -2.0, "Y", color="g")
-        # Z axis（blue）
-        ax.plot([-1, -1], [-1, length], color="b")
-        ax.text(-2.0, length * 1.1, "Z", color="b")

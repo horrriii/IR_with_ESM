@@ -1,0 +1,61 @@
+&CONTROL
+   calculation      = 'scf'
+   verbosity        = 'high'
+   restart_mode     = 'from_scratch'
+   wf_collect       = .true.
+   nstep            = 1
+   tstress          = .false.
+   tprnfor          = .true.
+   outdir           = 'tmp'
+   prefix           = 'H2O_IR'
+   pseudo_dir       = '/work/gf93/f93007/QE/pseudo'
+   trism            = .false.
+/
+&SYSTEM
+   nbnd             = 40
+   tot_charge       = 0.0
+   ecutwfc          = 62.473848207426286
+   ecutrho          = 624.7384820742628
+   nosym            = .false.
+   input_dft        = 'vdW-DF2'
+   assume_isolated  = 'esm'
+   esm_bc           = 'bc1'
+   ntyp             = 2
+   nat              = 3
+   ibrav            = 0
+/
+&ELECTRONS
+   electron_maxstep = 800
+   conv_thr         = 7.349864494991328e-12
+   mixing_mode      = 'plain'
+   mixing_beta      = 0.3333333333333333
+   mixing_ndim      = 12
+   diagonalization  = 'david'
+/
+&IONS
+   ion_dynamics     = 'bfgs'
+/
+&CELL
+/
+&FCP
+/
+&RISM
+/
+
+ATOMIC_SPECIES
+O 15.999 O.pbe-n-kjpaw_psl.1.0.0.UPF
+H 1.008 H.pbe-kjpaw_psl.1.0.0.UPF
+
+K_POINTS automatic
+1 1 1  0 0 0
+
+CELL_PARAMETERS angstrom
+19.99999964301650 0.00000000000000 0.00000000000000
+0.00000000000000 19.99999964301650 0.00000000000000
+0.00000000000000 0.00000000000000 19.99999964301650
+
+ATOMIC_POSITIONS angstrom
+O 10.0000000000 10.0000000000 0.0031808792  
+H 10.0000000000 10.7690707148 0.5947286588  
+H 10.0000000000 9.2209292852 0.5947286588  
+
