@@ -1,0 +1,24 @@
+Unloading odyssey
+  WARNING: Did not unuse /work/opt/local/modules/modulefiles/WO/odyssey/core
+  WARNING: Did not unuse /work/opt/local/modules/modulefiles/WO/odyssey/util
+ERROR: Unable to locate a modulefile for 'fjmpi/1.2.39'
+
+Loading fj/1.2.39
+  Loading requirement: fjmpi/1.2.39
+
+Loading fj/1.2.41
+  ERROR: Conflicting 'fj' is loaded
+
+Loading odyssey
+  ERROR: Load of requirement 'fj/1.2.41' failed
+/work/gf93/f93007/.fzf.bash: line 7: fzf: command not found
+ERROR: Unable to locate a modulefile for 'fjmpi/1.2.39'
+
+Loading fj/1.2.39
+  Loading requirement: fjmpi/1.2.39
+
+Loading fj/1.2.41
+  ERROR: Conflicting 'fj' is loaded
+
+Loading odyssey
+  ERROR: Load of requirement 'fj/1.2.41' failed
