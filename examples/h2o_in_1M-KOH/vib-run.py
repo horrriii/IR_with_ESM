@@ -9,6 +9,22 @@ from IR_with_ESM.utils.analysis import Analysis
 from ase.thermochemistry import HarmonicThermo
 from ase.wisteria import make_calculation_directory
 
+# Set the calculator object
+calc_obj = Espresso
+profile = EspressoProfile(
+    argv=[
+        "mpirun",
+        "-np",
+        os.environ.get("PJM_MPI_PROC"),
+        "--stdout",
+        "espresso.pwo",
+        "/work/gf93/share/espresso/qe-rism-tuned/bin/pw.x",
+    ]
+)
+
+# Set calculator object kwargs
+atoms = read("relaxed.pwo", index=-1)
+
 ecutwfc = 850 * (eV / Ry)
 tot_charge = 0.0
 directory_name = "DFT"
@@ -90,8 +106,6 @@ input_data = {
     },
 }
 
-atoms = read("relaxed.pwo", index=-1)
-
 solute_ljs = []
 solute_epsilons = []
 solute_sigmas = []
@@ -112,20 +126,6 @@ atoms.set_solute_lj(solute_ljs=solute_ljs)
 atoms.set_solute_epsilon(solute_epsilons=solute_epsilons)
 atoms.set_solute_sigma(solute_sigmas=solute_sigmas)
 
-make_calculation_directory(directory_name=directory_name, outdir=outdir)
-
-calc_obj = Espresso
-profile = EspressoProfile(
-    argv=[
-        "mpirun",
-        "-np",
-        os.environ.get("PJM_MPI_PROC"),
-        "--stdout",
-        "espresso.pwo",
-        "/work/gf93/share/espresso/qe-rism-tuned/bin/pw.x",
-    ]
-)
-
 calc_kwargs = {
     "input_data": input_data,
     "profile": profile,
@@ -137,6 +137,9 @@ calc_kwargs = {
     "solvents_info": solvents_info,
 }
 
+make_calculation_directory(directory_name=directory_name, outdir=outdir)
+
+# Initialize Infrared_with_ESM
 ir_with_esm = Infrared_with_ESM(
     atoms,
     calc_obj=calc_obj,
@@ -149,10 +152,12 @@ ir_with_esm.run()
 ir_with_esm.summary(log="infrared_with_ESM-RISM.txt")
 ir_with_esm.write_mode()
 
+# Initialize analysis
 an = Analysis(ir_with_esm)
 an.export_gif()
 an.get_spectra_plot(save="spectra_H2O_with_ESM-RISM.png")
 
+# Calculate thermodynamic quantities
 eq_atoms = read('output/eq/espresso.pwo')
 potentialenergy = eq_atoms.get_potential_energy()
 vib_energies = ir_with_esm.get_energies()
