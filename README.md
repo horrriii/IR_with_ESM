@@ -6,7 +6,7 @@ During the development of this package, we drew significant inspiration from Vib
 
 ## Getting started
 ### Installation
-via direct Pip
+via direct pip
 
 Activate your python environment (`conda` or `virtualenv`) and install using `pip`:
 ```bash
