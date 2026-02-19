@@ -158,7 +158,7 @@ an.export_gif()
 an.get_spectra_plot(save="spectra_H2O_with_ESM-RISM.png")
 
 # Calculate thermodynamic quantities
-eq_atoms = read('output/eq/espresso.pwo')
+eq_atoms = read("output/eq/espresso.pwo")
 potentialenergy = eq_atoms.get_potential_energy()
 vib_energies = ir_with_esm.get_energies()
 vib_frequencies = ir_with_esm.get_frequencies()
@@ -171,6 +171,6 @@ S = thermo.get_entropy(temperature=T_ambient)
 A = thermo.get_helmholtz_energy(temperature=T_ambient)
 with open("helmholtz", "w") as helmholtz_file:
     helmholtz_file.write(f"Internal_energy  = {U:>20.11f} eV \n")
-    helmholtz_file.write(f"Entropy          = {S:>20.11f} ev/K \n")
+    helmholtz_file.write(f"Entropy          = {S:>20.11f} eV/K \n")
     helmholtz_file.write(f"TS               = {T_ambient * S:>20.11f} eV \n")
     helmholtz_file.write(f"Helmholtz_energy = {A:>20.11f} eV \n")
