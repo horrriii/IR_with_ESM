@@ -160,6 +160,51 @@ class Analysis:
         else:
             return fig, ax
 
+    def get_spectras_plots(self, ax=None, save=None, **kwargs):
+        frequencies, spectra = self.get_spectra(**kwargs)
+
+        if "Vibrations" in self.vibir_name:
+            name = "vib"
+        if "Infrared" in self.vibir_name:
+            name = "ir"
+
+        fig = None
+        if ax is None:
+            fig, ax = plt.subplots(figsize=(8, 4))
+
+        # Plot spectra
+        ax.fill_between(spectra[:, 0], spectra[:, 1], color="k", alpha=0.8, lw=0.5)
+
+        # Plot dicrete mode location
+
+        if name == "vib":
+            ymax_data = []
+            for i in frequencies:
+                index = np.argmin(np.abs(spectra[:, 0] - i))
+                ymax_data.append(spectra[index, 1])
+            ymax_data = np.array(ymax_data, dtype=float)
+
+        if name == "ir":
+            ymax_data = self.vibir_obj.intensities
+
+        color = "limegreen" if name == "vib" else "red"
+        ax.vlines(frequencies, 0, ymax_data, color=color, lw=1)
+
+        # Set labels
+        # ax.set_xlabel("Frequency, cm$^{-1}$", fontsize=12)
+        if name == "vib":
+            ax.set_ylabel("VDOS", fontsize=12)
+        if name == "ir":
+            ax.set_ylabel("Intensity, (D/Å)$^2$ amu$^{-1}$", fontsize=15)
+
+        # Save file protocol
+        if save and fig is not None:
+            fig.savefig(save, dpi=300, bbox_inches="tight")
+
+        if fig is None:
+            return ax
+        else:
+            return fig, ax
 
 def write_traj(args: tuple):
     """
