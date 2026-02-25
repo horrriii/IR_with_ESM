@@ -149,7 +149,7 @@ class Analysis:
         if name == "vib":
             ax.set_ylabel("VDOS", fontsize=12)
         if name == "ir":
-            ax.set_ylabel("Intensity, (D/Å)$^2$ amu$^{-1}$", fontsize=12)
+            ax.set_ylabel("Intensity, (D/$\\mathrm{\\AA}$)$^2$ amu$^{-1}$", fontsize=12)
 
         # Save file protocol
         if save and fig is not None:
@@ -195,7 +195,7 @@ class Analysis:
         if name == "vib":
             ax.set_ylabel("VDOS", fontsize=12)
         if name == "ir":
-            ax.set_ylabel("Intensity, (D/Å)$^2$ amu$^{-1}$", fontsize=15)
+            ax.set_ylabel("Intensity, (D/$\\mathrm{\\AA}$)$^2$ amu$^{-1}$", fontsize=15)
 
         # Save file protocol
         if save and fig is not None:
